@@ -1,0 +1,10 @@
+interface pgp-wrapper-imports {}
+
+interface pgp-wrapper-exports {
+  decrypt: func(enc: string, key: string, pass: string) -> result<string, string>
+}
+
+default world pgp-wrapper-world {
+  import pgp-wrapper-imports: self.pgp-wrapper-imports
+  export pgp-wrapper-exports: self.pgp-wrapper-exports
+}

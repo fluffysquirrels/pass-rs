@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -eux -o pipefail;
+
+readonly crate_dir="$( cd $(dirname ${BASH_SOURCE})/..; pwd )";
+
+cd "${crate_dir}";
+
+bin/build;
+
+cargo run --package pass-rs;

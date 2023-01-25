@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+set -eux -o pipefail;
+
+readonly crate_dir="$( cd $(dirname ${BASH_SOURCE})/..; pwd )";
+readonly wit_bindgen_dir="$( cd ${crate_dir}/../github.com/bytecodealliance/wit-bindgen; pwd )";
+readonly wasm_tools_dir="$( cd ${crate_dir}/../github.com/bytecodealliance/wasm-tools; pwd )";
+
+## Generate bindings from wit
+pushd "${wit_bindgen_dir}";
+
+cargo run -- guest rust "${crate_dir}/wit/pgp-wrapper.wit"  --out-dir "${crate_dir}/wit/generated/";
+
+popd
+
+## Build pgp-wrapper wasm
+
+cd "${crate_dir}";
+
+# cargo build --package pgp-wrapper --target wasm32-unknown-unknown;
+cargo build --package pgp-wrapper --target wasm32-unknown-unknown --release;
+# cargo build --package pgp-wrapper --target wasm32-wasi --release;
+
+## Convert pgp-wrapper.wasm into a component
+
+pushd "${wasm_tools_dir}";
+
+cargo run -- component new \
+      "${crate_dir}/target/wasm32-unknown-unknown/release/pgp_wrapper.wasm" \
+      > "${crate_dir}/target/wasm32-unknown-unknown/release/pgp_wrapper.component.wasm"
+
+popd
+
+## Strip pgp-wrapper wasm
+
+# pushd "${wasm_tools_dir}";
+#
+# cargo run -- strip \
+#       --delete '^\.debug_' \
+#       "${crate_dir}/target/wasm32-unknown-unknown/release/pgp_wrapper.wasm" \
+#       > "${crate_dir}/target/wasm32-unknown-unknown/release/pgp_wrapper.stripped.wasm"
+#
+# popd
+
+## Build pass-rs.
+
+cargo build --package pass-rs;
