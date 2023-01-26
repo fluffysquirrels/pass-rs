@@ -8,7 +8,7 @@ readonly wasm_tools_dir="$( cd ${crate_dir}/../github.com/bytecodealliance/wasm-
 ## Generate bindings from wit
 pushd "${wit_bindgen_dir}";
 
-cargo run -- guest rust "${crate_dir}/wit/pgp-wrapper.wit"  --out-dir "${crate_dir}/wit/generated/";
+cargo run -- guest rust "${crate_dir}/wit/pgp-wrapper.wit"  --out-dir "${crate_dir}/wit/generated-guest/";
 
 popd
 
