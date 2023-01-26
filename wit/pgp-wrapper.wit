@@ -1,7 +1,7 @@
 interface pgp-wrapper-imports {}
 
 interface pgp-wrapper-exports {
-  decrypt: func(enc: string, key: string, pass: string) -> result<string, string>
+  decrypt: func(enc: list<u8>, key: string, pass: string) -> result<list<u8>, string>
 }
 
 default world pgp-wrapper-world {

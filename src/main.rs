@@ -29,6 +29,7 @@ fn main() -> Result<(), anyhow::Error> {
     let component_bytes = include_bytes!("../target/wasm32-unknown-unknown/release/pgp_wrapper.component.wasm");
     let component = wasmtime::component::Component::new(&mut engine, &component_bytes)?;
     let mut store = wasmtime::Store::new(&mut engine, Context {});
+    #[allow(unused_mut)]
     let mut linker = wasmtime::component::Linker::new(&mut engine);
 //    linker.root().func_wrap(
 //        "host",
@@ -41,13 +42,16 @@ fn main() -> Result<(), anyhow::Error> {
     let func = { // Scope exports
         let mut exports = instance.exports(&mut store);
         let mut mod_instance = exports.instance("pgp-wrapper-exports").expect("to find instance");
-        let func = mod_instance.typed_func::<(String, String, String,), (Result<String,String>,)>("decrypt")?;
+        let func = mod_instance.typed_func::<(Vec<u8>, String, String,), (Result<Vec<u8>,String>,)>("decrypt")?;
         func
     };
     // let func = instance.get_typed_func::<(String, String, String,), (Result<String,String>,), _>(&mut store, "pgp-wrapper-exports#decrypt")?;
-    let (res,) = func.call(&mut store, ("encrypted".to_string(), "key".to_string(), "passphrase".to_string()))?;
-    let out = res.unwrap();
-    println!("out = '{out}'");
+    let enc: Vec<u8> = include_bytes!("../test_data/pass/test-pass.gpg").to_vec();
+    let key = include_str!("../test_data/priv.key").to_string();
+    let passphrase = "foo".to_string();
+    let (res,) = func.call(&mut store, (enc, key, passphrase))?;
+    let out: Vec<u8> = res.unwrap();
+    println!("out = '{out:?}'");
     func.post_return(&mut store)?;
     Ok(())
 }

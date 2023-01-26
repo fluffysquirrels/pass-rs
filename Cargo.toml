@@ -12,3 +12,6 @@ wasmtime = { path = "../github.com/bytecodealliance/wasmtime/crates/wasmtime", f
 members = [
   "crates/pgp-wrapper"
 ]
+
+[profile.release]
+strip = true
