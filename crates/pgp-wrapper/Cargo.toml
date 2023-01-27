@@ -3,15 +3,12 @@ name = "pgp-wrapper"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
 getrandom = { version = "0.2", features = ["custom"] }
 getrandom_0_1 = { package = "getrandom", version = "0.1.16", features = ["dummy"] }
 iana-time-zone = { path = "../../../github.com/strawlab/iana-time-zone", default-features = false, features = ["fallback"] }
-
-# pgp = { path = "../../../github.com/rpgp/rpgp", features = ["wasm"] }
 pgp = { path = "../../../github.com/rpgp/rpgp", features = [] }
+rand_core = { version = "0.6.4", features = ["getrandom"] }
 wit-bindgen-guest-rust = { path = "../../../github.com/bytecodealliance/wit-bindgen/crates/guest-rust" }
 
 [lib]

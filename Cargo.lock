@@ -1329,6 +1329,7 @@ name = "pass-rs"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "rand",
  "wasmtime",
 ]
 
@@ -1409,6 +1410,7 @@ dependencies = [
  "getrandom 0.2.8",
  "iana-time-zone 0.1.53",
  "pgp",
+ "rand_core 0.6.4",
  "wit-bindgen-guest-rust",
 ]
 

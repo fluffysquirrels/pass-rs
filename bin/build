@@ -22,21 +22,21 @@ cargo build --package pgp-wrapper --target wasm32-unknown-unknown --release;
 
 ## Strip pgp-wrapper wasm
 
-pushd "${wasm_tools_dir}";
-
-cargo run -- strip \
-      --delete '^\.debug_' \
-      "${crate_dir}/target/wasm32-unknown-unknown/release/pgp_wrapper.wasm" \
-      > "${crate_dir}/target/wasm32-unknown-unknown/release/pgp_wrapper.stripped.wasm"
-
-popd
+# pushd "${wasm_tools_dir}";
+#
+# cargo run -- strip \
+#       --delete '^\.debug_' \
+#       "${crate_dir}/target/wasm32-unknown-unknown/release/pgp_wrapper.wasm" \
+#       > "${crate_dir}/target/wasm32-unknown-unknown/release/pgp_wrapper.stripped.wasm"
+#
+# popd
 
 ## Convert pgp-wrapper.wasm into a component
 
 pushd "${wasm_tools_dir}";
 
 cargo run -- component new \
-      "${crate_dir}/target/wasm32-unknown-unknown/release/pgp_wrapper.stripped.wasm" \
+      "${crate_dir}/target/wasm32-unknown-unknown/release/pgp_wrapper.wasm" \
       > "${crate_dir}/target/wasm32-unknown-unknown/release/pgp_wrapper.component.wasm"
 
 popd

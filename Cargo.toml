@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 anyhow = "1.0"
+rand = "0.8"
 # wasmtime = { version = "5.0.0", features = ["component-model"] }
 wasmtime = { path = "../github.com/bytecodealliance/wasmtime/crates/wasmtime", features = ["component-model"] }
 
@@ -14,4 +15,4 @@ members = [
 ]
 
 [profile.release]
-strip = true
+# strip = true
