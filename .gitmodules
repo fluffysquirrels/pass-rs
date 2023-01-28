@@ -1,0 +1,4 @@
+[submodule "crates/external/chrono_0.4.23"]
+	path = crates/external/chrono_0.4.23
+	url = https://github.com/fluffysquirrels/chrono
+	branch = wasi-clocks-component-preview

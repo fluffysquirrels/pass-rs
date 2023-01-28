@@ -1,0 +1,3 @@
+default world chrono {
+  import utc-clock: pkg.wasi-clocks.utc-clock
+}

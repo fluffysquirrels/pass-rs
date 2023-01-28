@@ -16,3 +16,6 @@ members = [
 
 [profile.release]
 # strip = true
+
+[patch.crates-io]
+chrono = { version = "0.4.23", path = "crates/external/chrono_0.4.23" }

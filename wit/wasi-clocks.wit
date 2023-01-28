@@ -1,0 +1,9 @@
+default interface utc-clock {
+  /// A UTC time and date in seconds plus nanoseconds since the Unix epoch 1970-01-01 00:00:00 UTC.
+  record datetime {
+      seconds: u64,
+      nanoseconds: u32,
+  }
+
+  now: func() -> datetime
+}

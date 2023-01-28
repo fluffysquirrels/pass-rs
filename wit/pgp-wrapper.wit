@@ -1,10 +1,14 @@
-interface pgp-wrapper-imports {}
+interface get-random {
+  get-random-bytes: func(len: u32) -> list<u8>
+}
 
 interface pgp-wrapper-exports {
-  decrypt: func(enc: list<u8>, key: string, pass: string) -> result<list<u8>, string>
+  decrypt: func(enc: list<u8>, priv-key: list<u8>, key-pass: string) -> result<list<u8>, string>
+  encrypt: func(msg: list<u8>, pub-key: list<u8>) -> result<list<u8>, string>
 }
 
 default world pgp-wrapper-world {
-  import pgp-wrapper-imports: self.pgp-wrapper-imports
+  import get-random: self.get-random
+  import utc-clock: pkg.wasi-clocks.utc-clock
   export pgp-wrapper-exports: self.pgp-wrapper-exports
 }

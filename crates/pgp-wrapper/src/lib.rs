@@ -2,6 +2,7 @@
 
 #[path = "../../../wit/generated-guest/pgp-wrapper-world.rs"]
 #[macro_use]
+#[allow(dead_code)]
 mod pgp_wrapper_world;
 
 use core::num::NonZeroU32;

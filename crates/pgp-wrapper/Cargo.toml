@@ -4,7 +4,14 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+# Added here just to force the feature "wasi-clocks-component-preview",
+# not used in the lib directly.
+chrono = { version = "0.4.23", default-features = false, features = ["wasi-clocks-component-preview"] }
+
 getrandom = { version = "0.2", features = ["custom"] }
+
+# Added here just to force the feature "dummy",
+# not used in the lib directly.
 getrandom_0_1 = { package = "getrandom", version = "0.1.16", features = ["dummy"] }
 iana-time-zone = { path = "../../../github.com/strawlab/iana-time-zone", default-features = false, features = ["fallback"] }
 pgp = { path = "../../../github.com/rpgp/rpgp", features = [] }
