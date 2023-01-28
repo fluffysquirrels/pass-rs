@@ -71,6 +71,7 @@ impl PgpWrapperExports for RealPgpWrapperWorld {
         let priv_key = SignedSecretKey::from_bytes(&*priv_key_bytes)
             .map_err(|e| e.to_string())?;
         let (decrypter, _) = enc_message.decrypt(
+            /* msg_pw */ || "".to_string(), // Not used, removed in pgp crate's master.
             /* key_pw */ || passphrase,
             &[&priv_key])
             .map_err(|e| e.to_string())?;

@@ -8,6 +8,7 @@ edition = "2021"
 # not used in the lib directly.
 chrono = { version = "0.4.23", default-features = false, features = ["wasi-clocks-component-preview"] }
 
+# getrandom is used at different versions in the dependency tree
 getrandom = { version = "0.2", features = ["custom"] }
 
 # Added here just to force the feature "dummy",
@@ -17,9 +18,9 @@ getrandom_0_1 = { package = "getrandom", version = "0.1.16", features = ["dummy"
 # Added here to force the feature "fallback"
 iana-time-zone = { version = "0.1.53", default-features = false, features = ["fallback"] }
 
-pgp = { path = "../../../../github.com/rpgp/rpgp", features = [] }
+pgp = "0.9.0"
 rand_core = { version = "0.6.4", features = ["getrandom"] }
-wit-bindgen-guest-rust = { path = "../../../../github.com/bytecodealliance/wit-bindgen/crates/guest-rust" }
+wit-bindgen-guest-rust = { git = "https://github.com/bytecodealliance/wit-bindgen", rev = "98c2b1e4cb10d3757114b7524d112511a4c7459e" }
 
 [lib]
 crate-type = ["cdylib"]
