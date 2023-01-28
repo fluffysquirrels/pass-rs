@@ -2,8 +2,7 @@
 
 ## WIP
 
-* encrypt_example is crashing on std::time::SystemTime::now(), which is unimplemented for wasm32.
-    * Patch chrono to call a component-model import
+* Finish moving all patched dependencies into this repo as submodules.
 
 ## Must do (before publishing)
 
