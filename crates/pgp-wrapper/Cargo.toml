@@ -13,7 +13,10 @@ getrandom = { version = "0.2", features = ["custom"] }
 # Added here just to force the feature "dummy",
 # not used in the lib directly.
 getrandom_0_1 = { package = "getrandom", version = "0.1.16", features = ["dummy"] }
-iana-time-zone = { path = "../../../github.com/strawlab/iana-time-zone", default-features = false, features = ["fallback"] }
+
+# Use our patched version that disables wasm32 web dependencies, force the feature "fallback"
+iana-time-zone = { path = "crates/external/iana-time-zone_0.1.53", default-features = false, features = ["fallback"] }
+
 pgp = { path = "../../../github.com/rpgp/rpgp", features = [] }
 rand_core = { version = "0.6.4", features = ["getrandom"] }
 wit-bindgen-guest-rust = { path = "../../../github.com/bytecodealliance/wit-bindgen/crates/guest-rust" }
