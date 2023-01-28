@@ -2,7 +2,6 @@
 
 ## WIP
 
-* Finish moving all patched dependencies into this repo as submodules.
 
 ## Must do (before publishing)
 
@@ -13,3 +12,14 @@
     * pass show
     * pass insert
     * pass rm
+
+## Might do
+
+* chrono
+    * Implement DateTime<Local>::now(); use an import to access the local timezone UTC offset.
+
+* Upstream patches
+    * chrono
+    * pgp crate
+    * iana-time-zone
+    * [wasi-clocks](https://github.com/WebAssembly/wasi-clocks) specification / impl
