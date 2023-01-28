@@ -6,8 +6,7 @@ edition = "2021"
 [dependencies]
 anyhow = "1.0"
 rand = "0.8"
-# wasmtime = { version = "5.0.0", features = ["component-model"] }
-wasmtime = { path = "../github.com/bytecodealliance/wasmtime/crates/wasmtime", features = ["component-model"] }
+wasmtime = { path = "../../github.com/bytecodealliance/wasmtime/crates/wasmtime", features = ["component-model"] }
 
 [workspace]
 members = [
@@ -18,4 +17,5 @@ members = [
 # strip = true
 
 [patch.crates-io]
-chrono = { version = "0.4.23", path = "crates/external/chrono_0.4.23" }
+chrono = { path = "../external_crates/chrono_0.4.23" }
+iana-time-zone = { path = "../external_crates/iana-time-zone_0.1.53" }

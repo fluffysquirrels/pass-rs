@@ -2,8 +2,8 @@
 set -eux -o pipefail;
 
 readonly crate_dir="$( cd $(dirname ${BASH_SOURCE})/..; pwd )";
-readonly wit_bindgen_dir="$( cd ${crate_dir}/../github.com/bytecodealliance/wit-bindgen; pwd )";
-readonly wasm_tools_dir="$( cd ${crate_dir}/../github.com/bytecodealliance/wasm-tools; pwd )";
+readonly wit_bindgen_dir="$( cd ${crate_dir}/../../github.com/bytecodealliance/wit-bindgen; pwd )";
+readonly wasm_tools_dir="$( cd ${crate_dir}/../../github.com/bytecodealliance/wasm-tools; pwd )";
 
 ## Generate bindings from wit
 pushd "${wit_bindgen_dir}";

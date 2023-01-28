@@ -1,0 +1,8 @@
+[submodule "external_crates/iana-time-zone_0.1.53"]
+	path = external_crates/iana-time-zone_0.1.53
+	url = https://github.com/fluffysquirrels/iana-time-zone
+	branch = js-optional-for-wasm32
+[submodule "external_crates/chrono_0.4.23"]
+	path = external_crates/chrono_0.4.23
+	url = https://github.com/fluffysquirrels/chrono
+	branch = wasi-clocks-component-preview
