@@ -2,6 +2,9 @@
 
 A password manager like [`pass`](https://www.passwordstore.org/) implemented in Rust.
 
+Currently this is just a prototype that encrypts and decrypts data in
+the required format.
+
 ## Getting started
 
 This crate uses submodules for external crate dependencies that have
