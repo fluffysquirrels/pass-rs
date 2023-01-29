@@ -4,7 +4,6 @@
 
 * CLI
     * pass show
-        * Read passphrase from terminal
     * pass insert
         * Read secret from terminal
 

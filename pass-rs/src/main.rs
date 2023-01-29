@@ -1,6 +1,6 @@
 mod pgp_wrapper;
 
-use anyhow::{ anyhow, Context };
+use anyhow::Context;
 use clap::Parser;
 use std::convert::TryFrom;
 use std::ffi::OsStr;
@@ -170,9 +170,13 @@ fn show_main(args: ShowArgs) -> Result<()> {
     let enc = std::fs::read(&enc_path)
         .with_context(|| format!("Failed to read encrypted secret from '{enc_path:?}'"))?;
     let priv_key = args.common.read_priv_key()?;
-    let passphrase = "foo";
+    let passphrase = read_passphrase(&*args.common.priv_key_file)?;
     let out: Vec<u8> = pgp_wrapper_context.bindings.pgp_wrapper_exports()
-                           .decrypt(&mut pgp_wrapper_context.store, &*enc, &*priv_key, passphrase)?
+                           .decrypt(
+                               &mut pgp_wrapper_context.store,
+                               &*enc,
+                               &*priv_key,
+                               &*passphrase)?
                            .map_err(|e| anyhow::Error::msg(e))?;
     let out_str = std::str::from_utf8(&*out);
     match out_str {
@@ -202,6 +206,13 @@ fn insert_main(args: InsertArgs) -> Result<()> {
     write_secret(&out_path, &*out)?;
 
     Ok(())
+}
+
+fn read_passphrase(priv_key_path: &Path) -> Result<String> {
+    let prompt = format!("Enter your passphrase for private key {path:?}: ",
+                         path = priv_key_path);
+    rpassword::prompt_password(&*prompt)
+        .with_context(|| "While reading your passphrase")
 }
 
 fn write_secret(path: &Path, data: &[u8]) -> Result<()> {
