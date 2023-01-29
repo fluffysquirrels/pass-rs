@@ -34,6 +34,9 @@ struct ShowArgs {
 struct InsertArgs {
     #[clap(flatten)]
     common: CommonArgs,
+
+    #[arg(value_parser(SecretNameParser))]
+    secret_name: SecretName,
 }
 
 #[derive(clap::Args, Debug)]
@@ -183,16 +186,17 @@ fn insert_main(args: InsertArgs) -> Result<()> {
     let out: Vec<u8> = pgp_wrapper_context.bindings.pgp_wrapper_exports()
                            .encrypt(&mut pgp_wrapper_context.store, msg, &*pub_key)?
                            .map_err(|e| anyhow::Error::msg(e))?;
-    write_output(Path::new("target/test_output/encrypted.gpg"), &*out)?;
+    let out_path = args.common.get_store_dir().secret_file_path(&args.secret_name);
+    write_secret(&out_path, &*out)?;
 
     Ok(())
 }
 
-fn write_output(path: &Path, data: &[u8]) -> Result<()> {
+fn write_secret(path: &Path, data: &[u8]) -> Result<()> {
     if let Some(dir) = path.parent() {
         std::fs::create_dir_all(dir)?;
     }
-    println!("Writing output to {path}", path = path.display());
+    println!("Writing encrypted secret to {path}", path = path.display());
     std::fs::write(path, data)?;
     Ok(())
 }
