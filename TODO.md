@@ -8,9 +8,9 @@
 
 ## Must do (before publishing)
 
-* Code organisation pass on `pass-rs/src/main.rs`
 * Logging
 * CLI
+    * Argument and subcommand descriptions
     * pass insert
         * Don't overwrite secrets by default
     * pass list
