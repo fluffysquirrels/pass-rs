@@ -174,7 +174,19 @@ fn show_main(args: ShowArgs) -> Result<()> {
     let out: Vec<u8> = pgp_wrapper_context.bindings.pgp_wrapper_exports()
                            .decrypt(&mut pgp_wrapper_context.store, &*enc, &*priv_key, passphrase)?
                            .map_err(|e| anyhow::Error::msg(e))?;
-    write_output(Path::new("target/test_output/test-pass.decrypted.txt"), &*out)?;
+    let out_str = std::str::from_utf8(&*out);
+    match out_str {
+        Ok(v) => {
+            print!("{v}");
+            if !v.ends_with("\n") && !v.ends_with("\r\n") {
+                println!("");
+            }
+        }
+        Err(_e) => {
+            eprintln!("Secret data is not valid UTF8, printing byte array");
+            println!("{out:?}");
+        }
+    }
 
     Ok(())
 }
