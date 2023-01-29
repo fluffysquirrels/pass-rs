@@ -2,18 +2,27 @@
 
 ## WIP
 
+* CLI
+    * pass show
+        * Read passphrase from terminal
+        * Write output to terminal
+    * pass insert
+        * Read secret from termina
+        * Write output to store
 
 ## Must do (before publishing)
 
-* CLI interface with clap
-    * Read keys and encrypted data from passed file paths
-    * Read passphrase from terminal
+* Logging
+* CLI
     * pass list
-    * pass show
-    * pass insert
+    * pass mv
     * pass rm
 
 ## Might do
+
+* Encrypt to multiple keys
+* Access keys in the GPG key store
+* Key generation
 
 * chrono
     * Implement DateTime<Local>::now(); use an import to access the local timezone UTC offset.

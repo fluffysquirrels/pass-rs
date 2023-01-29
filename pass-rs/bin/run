@@ -7,4 +7,4 @@ cd "${crate_dir}";
 
 bin/build;
 
-cargo run --package pass-rs --release;
+cargo run --package pass-rs --release -- "$@";

@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 anyhow = "1.0"
+clap = { version = "4.1.4", features = ["derive", "env"] }
 rand = "0.8"
 wasmtime = { git = "https://github.com/bytecodealliance/wasmtime", rev = "ec6922ff2407bb81f148bd8b14ee66642ea38a5f", features = ["component-model"] }
 
