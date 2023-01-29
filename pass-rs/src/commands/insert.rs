@@ -12,6 +12,9 @@ pub struct Args {
 
     #[arg(value_parser(crate::args::SecretNameParser))]
     secret_name: SecretName,
+
+    #[arg(default_value_t = false, long)]
+    replace: bool,
 }
 
 pub fn main(args: Args) -> Result<()> {
@@ -26,7 +29,7 @@ pub fn main(args: Args) -> Result<()> {
                                &*pub_key)?
                            .map_err(|e| anyhow::Error::msg(e))?;
     let out_path = args.common.get_store_dir().secret_file_path(&args.secret_name);
-    crate::utils::write_secret(&out_path, &*out)?;
+    crate::utils::write_secret(&out_path, &*out, args.replace)?;
 
     Ok(())
 }

@@ -12,7 +12,6 @@
 * CLI
     * Argument and subcommand descriptions
     * pass insert
-        * Don't overwrite secrets by default
     * pass list
     * pass mv
     * pass rm

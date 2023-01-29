@@ -1,13 +1,23 @@
 use anyhow::Context;
 use crate::Result;
+use std::fs::{ File, OpenOptions };
+use std::io::Write;
 use std::path::Path;
 
-pub fn write_secret(path: &Path, data: &[u8]) -> Result<()> {
-    if let Some(dir) = path.parent() {
-        std::fs::create_dir_all(dir)?;
-    }
+pub fn write_secret(path: &Path, data: &[u8], replace: bool) -> Result<()> {
     println!("Writing encrypted secret to {path}", path = path.display());
-    std::fs::write(path, data)?;
+    (|| -> Result<()> { // Wrap any file operation errors with anyhow.
+        if let Some(dir) = path.parent() {
+            std::fs::create_dir_all(dir)?;
+        }
+        let mut file: File = OpenOptions::new().write(true)
+                                               .create_new(!replace)
+                                               .open(path)?;
+        file.write_all(data)?;
+        Ok(())
+    })().with_context(|| format!("Failed to write encrypted secret to {path}",
+                                 path = path.display()))?;
+
     Ok(())
 }
 
