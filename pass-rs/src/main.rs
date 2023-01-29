@@ -198,9 +198,13 @@ fn show_main(args: ShowArgs) -> Result<()> {
 fn insert_main(args: InsertArgs) -> Result<()> {
     let mut pgp_wrapper_context =  args.common.new_pgp_wrapper_context()?;
     let pub_key = args.common.read_pub_key()?;
-    let msg = b"hello, world!";
+    let secret_plaintext = rpassword::prompt_password("Enter your secret: ")
+        .with_context(|| "While reading your secret")?;
     let out: Vec<u8> = pgp_wrapper_context.bindings.pgp_wrapper_exports()
-                           .encrypt(&mut pgp_wrapper_context.store, msg, &*pub_key)?
+                           .encrypt(
+                               &mut pgp_wrapper_context.store,
+                               secret_plaintext.as_bytes(),
+                               &*pub_key)?
                            .map_err(|e| anyhow::Error::msg(e))?;
     let out_path = args.common.get_store_dir().secret_file_path(&args.secret_name);
     write_secret(&out_path, &*out)?;

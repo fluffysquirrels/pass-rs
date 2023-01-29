@@ -5,10 +5,10 @@
 * CLI
     * pass show
     * pass insert
-        * Read secret from terminal
 
 ## Must do (before publishing)
 
+* Code organisation pass on `pass-rs/src/main.rs`
 * Logging
 * CLI
     * pass insert
