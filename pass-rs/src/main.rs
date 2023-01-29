@@ -16,8 +16,9 @@ struct Args {
 
 #[derive(clap::Subcommand, Debug)]
 enum Command {
-    Show(commands::show::Args),
     Insert(commands::insert::Args),
+    List(commands::list::Args),
+    Show(commands::show::Args),
 }
 
 fn main() -> Result<()> {
@@ -26,8 +27,9 @@ fn main() -> Result<()> {
     eprintln!("Args = {args:#?}");
 
     match args.command {
-        Command::Show(cmd_args) => commands::show::main(cmd_args)?,
         Command::Insert(cmd_args) => commands::insert::main(cmd_args)?,
+        Command::List(cmd_args) => commands::list::main(cmd_args)?,
+        Command::Show(cmd_args) => commands::show::main(cmd_args)?,
     };
 
     Ok(())

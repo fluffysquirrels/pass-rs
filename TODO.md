@@ -8,7 +8,6 @@
 
 * Logging
 * CLI
-    * pass list
     * pass mv
     * pass rm
 
