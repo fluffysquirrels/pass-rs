@@ -5,15 +5,15 @@
 * CLI
     * pass show
         * Read passphrase from terminal
-        * Write output to terminal
     * pass insert
-        * Read secret from termina
-        * Write output to store
+        * Read secret from terminal
 
 ## Must do (before publishing)
 
 * Logging
 * CLI
+    * pass insert
+        * Don't overwrite secrets by default
     * pass list
     * pass mv
     * pass rm
