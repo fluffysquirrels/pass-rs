@@ -5,14 +5,17 @@ use crate::{
     types::SecretName,
 };
 
+/// Insert a secret into the password store
 #[derive(clap::Args, Debug)]
 pub struct Args {
     #[clap(flatten)]
     common: CommonArgs,
 
+    /// Name of the secret to insert
     #[arg(value_parser(crate::args::SecretNameParser))]
     secret_name: SecretName,
 
+    /// Replace an existing secret. By default this will fail with an error.
     #[arg(default_value_t = false, long)]
     replace: bool,
 }

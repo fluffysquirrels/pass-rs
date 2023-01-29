@@ -5,11 +5,13 @@ use crate::{
     types::SecretName,
 };
 
+/// Show a secret in the password store
 #[derive(clap::Args, Debug)]
 pub struct Args {
     #[clap(flatten)]
     common: CommonArgs,
 
+    /// Name of the secret to show
     #[arg(value_parser(crate::args::SecretNameParser))]
     secret_name: SecretName,
 }

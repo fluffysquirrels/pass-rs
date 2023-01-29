@@ -7,12 +7,25 @@ use std::path::PathBuf;
 
 #[derive(clap::Args, Debug)]
 pub struct CommonArgs {
+    /// Root directory of the password store.
+    ///
+    /// If this argument is missing read from the environment variable
+    /// `PASS_RS_STORE_DIR`, and if that is missing the default value
+    /// "$HOME/.password-store" will be used.
     #[arg(long, env = "PASS_RS_STORE_DIR")]
     store_dir: Option<PathBuf>,
 
+    /// File to read as a public key for encryption operations.
+    ///
+    /// If this argument is missing try to read a value from the
+    /// environment variable `PASS_RS_PUB_KEY_FILE`.
     #[arg(long, env = "PASS_RS_PUB_KEY_FILE")]
     pub pub_key_file: PathBuf,
 
+    /// File to read as a private key for encryption operations.
+    ///
+    /// If this argument is missing try to read a value from the
+    /// environment variable `PASS_RS_PRIV_KEY_FILE`.
     #[arg(long, env = "PASS_RS_PRIV_KEY_FILE")]
     pub priv_key_file: PathBuf,
 }

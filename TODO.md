@@ -3,15 +3,11 @@
 ## WIP
 
 * CLI
-    * pass show
-    * pass insert
 
 ## Must do (before publishing)
 
 * Logging
 * CLI
-    * Argument and subcommand descriptions
-    * pass insert
     * pass list
     * pass mv
     * pass rm
