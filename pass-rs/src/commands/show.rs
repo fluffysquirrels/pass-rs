@@ -6,7 +6,7 @@ use crate::{
 };
 
 /// Show a secret in the password store
-#[derive(clap::Args, Debug)]
+#[derive(clap::Args, Clone, Debug)]
 pub struct Args {
     #[clap(flatten)]
     common: CommonArgs,
@@ -22,7 +22,7 @@ pub fn main(args: Args) -> Result<()> {
     let enc = std::fs::read(&enc_path)
         .with_context(|| format!("Failed to read encrypted secret from '{enc_path:?}'"))?;
     let priv_key = args.common.read_priv_key()?;
-    let passphrase = crate::utils::read_passphrase(&*args.common.priv_key_file)?;
+    let passphrase = crate::utils::read_passphrase(args.common.priv_key_path()?)?;
     let out: Vec<u8> = pgp_wrapper_context.bindings.pgp_wrapper_exports()
                            .decrypt(
                                &mut pgp_wrapper_context.store,

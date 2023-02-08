@@ -5,7 +5,7 @@ use crate::{
 };
 
 /// List the names of all secrets in the password store.
-#[derive(clap::Args, Debug)]
+#[derive(clap::Args, Clone, Debug)]
 pub struct Args {
     #[clap(flatten)]
     common: CommonArgs,

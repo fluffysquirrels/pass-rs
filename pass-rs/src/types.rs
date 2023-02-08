@@ -59,7 +59,7 @@ pub struct StoreDir {
 impl StoreDir {
     pub fn new(path: PathBuf) -> Self {
         StoreDir {
-            path: path,
+            path,
         }
     }
 

@@ -1,7 +1,10 @@
 use crate::Result;
 use rand::RngCore;
 
-wasmtime::component::bindgen!("pgp-wrapper");
+wasmtime::component::bindgen!({
+    world: "pgp-wrapper",
+    tracing: true,
+});
 
 pub struct Context {
     pub store: wasmtime::Store<State>,
@@ -11,6 +14,7 @@ pub struct Context {
 pub struct State;
 
 impl Context {
+    #[tracing::instrument(name = "pgp_wrapper::Context::new", level = "debug")]
     pub fn new() -> Result<Context> {
         let mut config = wasmtime::Config::new();
         config.wasm_component_model(true);
@@ -24,8 +28,8 @@ impl Context {
         let (bindings, _instance) = PgpWrapperWorld::instantiate(&mut store, &component, &linker)?;
 
         Ok(Context {
-            store: store,
-            bindings: bindings,
+            store,
+            bindings,
         })
     }
 }

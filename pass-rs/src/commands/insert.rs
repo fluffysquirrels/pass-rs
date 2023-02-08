@@ -6,7 +6,7 @@ use crate::{
 };
 
 /// Insert a secret into the password store
-#[derive(clap::Args, Debug)]
+#[derive(clap::Args, Clone, Debug)]
 pub struct Args {
     #[clap(flatten)]
     common: CommonArgs,
