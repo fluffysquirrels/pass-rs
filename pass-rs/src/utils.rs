@@ -5,7 +5,7 @@ use std::io::Write;
 use std::path::Path;
 
 pub fn write_secret(path: &Path, data: &[u8], replace: bool) -> Result<()> {
-    println!("Writing encrypted secret to {path}", path = path.display());
+    tracing::info!(path = path.display().to_string(), "Writing encrypted secret");
     (|| -> Result<()> { // Wrap any file operation errors with anyhow.
         if let Some(dir) = path.parent() {
             std::fs::create_dir_all(dir)?;
