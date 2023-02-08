@@ -1,0 +1,15 @@
+# Source this file to set envs for testing pass-rs using the password
+# store and keys in this directory.
+#
+# Tested with bash and zsh.
+
+if test -n "$BASH" ; then script=$BASH_SOURCE
+elif test -n "$ZSH_NAME" ; then script=${(%):-%x}
+else script=$0
+fi
+
+readonly test_dir="$( cd $(dirname "${script}"); pwd )";
+
+export PASS_RS_STORE_DIR="${test_dir}/pass"
+export PASS_RS_PUB_KEY_FILE="${test_dir}/pub.key"
+export PASS_RS_PRIV_KEY_FILE="${test_dir}/priv.key"
