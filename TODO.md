@@ -8,12 +8,12 @@
 
 * Logging
 * CLI
-    * pass ls
-        * Create alias `ls` for existing `list`
+    * pass-rs find
         * Take an optional subdir path
-    * pass cp
-    * pass mv
-    * pass rm
+    * pass-rs ls ?
+    * pass-rs cp
+    * pass-rs mv
+    * pass-rs rm
 
 ## Might do
 
