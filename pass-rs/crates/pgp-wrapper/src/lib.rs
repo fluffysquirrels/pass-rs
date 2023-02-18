@@ -86,8 +86,6 @@ impl PgpWrapperExports for RealPgpWrapperWorld {
         let literal_data =
             decrypted_message.get_literal()
                              .ok_or("No literal in decrypted message".to_string())?;
-        // let str = literal_data.to_string()
-        //                       .ok_or("Non UTF-8 string in LiteralData".to_string())?;
         let dec_bytes = literal_data.data().to_vec();
         Ok(dec_bytes)
     }

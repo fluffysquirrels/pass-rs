@@ -4,6 +4,7 @@ use crate::{
     Result,
     types::SecretName,
 };
+use std::io::Read;
 
 /// Insert a secret into the password store
 #[derive(clap::Args, Clone, Debug)]
@@ -16,15 +17,27 @@ pub struct Args {
     secret_name: SecretName,
 
     /// Replace an existing secret. By default this will fail with an error.
-    #[arg(default_value_t = false, long)]
+    #[arg(long, default_value_t = false)]
     replace: bool,
+
+    /// Read the secret value from stdin rather than a password prompt.
+    #[arg(long, default_value_t = false)]
+    from_stdin: bool,
 }
 
 pub fn main(args: Args) -> Result<()> {
     let mut pgp_wrapper_context =  args.common.new_pgp_wrapper_context()?;
     let pub_key = args.common.read_pub_key()?;
-    let secret_plaintext = rpassword::prompt_password("Enter your secret: ")
-        .with_context(|| "While reading your secret")?;
+
+    let secret_plaintext = if args.from_stdin {
+        let mut  = String::new();
+        std::io::stdin().read_to_string(&mut s)?;
+        s
+    } else {
+        rpassword::prompt_password("Enter your secret: ")
+                  .with_context(|| "While reading your secret")?
+    };
+
     let out: Vec<u8> = pgp_wrapper_context.bindings.pgp_wrapper_exports()
                            .encrypt(
                                &mut pgp_wrapper_context.store,
