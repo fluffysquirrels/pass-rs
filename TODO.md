@@ -17,6 +17,14 @@
 
 ## Might do
 
+* Split `args::CommonArgs` into separate use-based structs. Goal is to
+  see more accurate prompts, e.g. no prompt for keys in `find`, and no
+  prompt for private key in `insert`. Another benefit: automatic clap
+  validation for required values like public key in `insert`, rather
+  than returning an `Err` later dynamically.
+    * `DecryptArgs`
+    * `EncryptArgs`
+    * `StoreDir`
 * Encrypt to multiple keys
 * Check the key is correct (based on `${STORE}/.gpg-id`) before operating
 * Access keys in the GPG key store
