@@ -43,9 +43,9 @@
         * `mv`
     * git command, e.g. `pass-rs git push`, that forwards commands to git
     * Multiple repos under subdirectories? No.
-      Doesn't really work without .gitignore in the root or submodules or something.
+      Doesn't really work for the git root without .gitignore or submodules or something.
 * Check the key is correct (based on `${STORE}/.gpg-id`) before operating
-* Access keys in the GPG key store
+* Access keys in the GPG key store?
 * Key generation
 
 * chrono
